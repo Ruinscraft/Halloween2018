@@ -81,17 +81,7 @@ public class Halloween2018Database {
 			}
 			
 			player.sendMessage(ChatColor.GOLD + "I have a Powder for you...");
-			
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
-			}
-			
-			if (!player.isOnline()) { // remember we waited for 2 seconds...
-				return;
-			}
-			
+
 			NPC npc = CitizensAPI.getNPCRegistry().getById(npcID);
 			NPCPowderGiverTrait powderTrait = npc.getTrait(NPCPowderGiverTrait.class);
 			String powderName = powderTrait.getPowder();
@@ -103,11 +93,6 @@ public class Halloween2018Database {
 				lpapi.getUserManager().saveUser(user);
 			}
 
-			player.sendMessage(ChatColor.GOLD + "Received Powder: " + ChatColor.RED + powderName);
-			player.sendMessage(ChatColor.GOLD + "Use it with " + ChatColor.RED + "/powder " + powderName);
-			player.sendTitle(ChatColor.GOLD + "POWDER UP!", "You got the " + ChatColor.RED + powderName + ChatColor.WHITE + " Powder!", 5, 80, 20);
-			player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 0.5F, 1.0F);
-			
 			try {
 				PreparedStatement insert = getConnection().prepareStatement("insert into npc_interact (player_uuid, npc_id) values (?, ?);");
 				insert.setString(1, playerUUID.toString());
@@ -117,6 +102,21 @@ public class Halloween2018Database {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+			
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+			
+			if (!player.isOnline()) { // remember we waited for 2 seconds...
+				return;
+			}
+			
+			player.sendMessage(ChatColor.GOLD + "Received Powder: " + ChatColor.RED + powderName);
+			player.sendMessage(ChatColor.GOLD + "Use it with " + ChatColor.RED + "/powder " + powderName);
+			player.sendTitle(ChatColor.GOLD + "POWDER UP!", "You got the " + ChatColor.RED + powderName + ChatColor.WHITE + " Powder!", 5, 80, 20);
+			player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 0.5F, 1.0F);
 		});
 	}
 
