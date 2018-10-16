@@ -1,0 +1,9 @@
+main: com.ruinscraft.halloween2018.Halloween2018Plugin
+name: ${name}
+version: ${project.version}
+
+depend: [Citizens]
+
+commands:
+  halloween:
+  
