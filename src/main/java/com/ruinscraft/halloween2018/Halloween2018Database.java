@@ -44,6 +44,7 @@ public class Halloween2018Database {
 			// check table
 			PreparedStatement insert = connection.prepareStatement("create table if not exists npc_interact (player_uuid VARCHAR(36), npc_id int);");
 			insert.execute();
+			insert.close();
 			return connection;
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
