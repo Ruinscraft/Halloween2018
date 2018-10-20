@@ -84,6 +84,10 @@ public class NPCListener implements Listener {
 			
 			ItemStack clicked = event.getCurrentItem();
 			
+			if (clicked == null || clicked.getType() == Material.AIR) {
+				return;
+			}
+			
 			if (clicked.hasItemMeta() && clicked.getItemMeta().hasDisplayName()) {
 				String costumeName = clicked.getItemMeta().getDisplayName();
 				CostumeHandler costumeHandler = Halloween2018Plugin.getInstance().getCostumeHandler();
